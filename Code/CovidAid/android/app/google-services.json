@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "122774835912",
+    "firebase_url": "https://covidaid-ef8ba.firebaseio.com",
+    "project_id": "covidaid-ef8ba",
+    "storage_bucket": "covidaid-ef8ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122774835912:android:ab8b41ced740f016ad8bfd",
+        "android_client_info": {
+          "package_name": "com.outliners.covidaid.CovidAid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122774835912-kc2e2f157a1dc1f1hdtj3o32ls935nva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.outliners.covidaid.CovidAid",
+            "certificate_hash": "3ad9733c39b3c55c7cac21ce44175289b368e750"
+          }
+        },
+        {
+          "client_id": "122774835912-cbtu0auv9bvah77rg3b6hbvh6qnj6nbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCduA80GSNSTWu1MlQK0sUtis2WW7JG6xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122774835912-cbtu0auv9bvah77rg3b6hbvh6qnj6nbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
