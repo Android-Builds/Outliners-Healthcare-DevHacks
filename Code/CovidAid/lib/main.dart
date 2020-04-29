@@ -11,9 +11,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      darkTheme: ThemeData.dark().copyWith(
-        backgroundColor: Colors.grey[900]
-      ),
       home: Homepage()
     );
   }
