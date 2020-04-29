@@ -11,31 +11,50 @@ class _FoodPageState extends State<FoodPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: <Widget>[
-              InputWidget(
-                label: 'Number of People:',
-                hint: 'Enter a number',
-                maxlines: 1,
-              ),
-              InputWidget(
-                label: 'Address:',
-                hint: 'Enter address',
-                maxlines: 3,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Row(
-                  children: <Widget>[
-                    Text('Criticality: '),
-                    SizedBox(width: 20.0),
-                    Flexible(child: NeedOptions())
-                  ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: <Widget>[
+                InputWidget(
+                  label: 'Number of People:',
+                  hint: 'Enter a number',
+                  maxlines: 1,
+                  maxlength: 5,
+                  keyboardtype: TextInputType.number,
                 ),
-              ),
-            ],
+                InputWidget(
+                  label: 'Address:',
+                  hint: 'Enter address',
+                  maxlines: 3,
+                  maxlength: 1000,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text('Criticality: '),
+                      SizedBox(width: 20.0),
+                      Flexible(child: NeedOptions())
+                    ],
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                MaterialButton(
+                  color: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0
+                    ),
+                  ),
+                  minWidth: 300.0,
+                  height: 60.0,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -45,12 +64,16 @@ class _FoodPageState extends State<FoodPage> {
 
 class InputWidget extends StatelessWidget {
   const InputWidget({
-    Key key, this.label, this.hint, this.maxlines,
+    Key key, this.label, this.hint, 
+    this.maxlines, this.maxlength, 
+    this.keyboardtype,
   }) : super(key: key);
 
   final String label;
   final String hint;
   final int maxlines;
+  final int maxlength;
+  final TextInputType keyboardtype;
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +92,11 @@ class InputWidget extends StatelessWidget {
           SizedBox(width: 20.0),
           Flexible(
             child: Container(
-              height: maxlines * 40.0,
+              height: maxlines * 60.0,
               child: TextField(
+                keyboardType: keyboardtype,
                 maxLines: maxlines,
+                maxLength: maxlength,
                 decoration: InputDecoration(
                   fillColor: Colors.grey[300],
                   filled: true,
