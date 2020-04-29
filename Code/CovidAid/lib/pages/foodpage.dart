@@ -6,6 +6,10 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
+
+  bool needfood = false;
+  bool needShelter = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,6 +40,33 @@ class _FoodPageState extends State<FoodPage> {
                       Text('Criticality: '),
                       SizedBox(width: 20.0),
                       Flexible(child: NeedOptions())
+                    ],
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                  child: Row(
+                    children: <Widget>[
+                      Checkbox(
+                        value: needfood,
+                        onChanged: (value) {
+                          setState(() {
+                            needfood = !needfood;
+                          });
+                        },
+                      ),
+                      Text('Food'),
+                      Spacer(),
+                      Checkbox(
+                        value: needShelter,
+                        onChanged: (value) {
+                          setState(() {
+                            needShelter = !needShelter;
+                          });
+                        },
+                      ),
+                      Text('Shelter'),                    
                     ],
                   ),
                 ),
