@@ -34,6 +34,7 @@ dependencies:
   firebase_storage: any
   font_awesome_flutter: any
   google_sign_in: any
+  enum_to_string: ^1.0.9
 
 dev_dependencies:
   flutter_test:
