@@ -8,7 +8,7 @@ We achieved it by providing all the possible information needed in a interactive
 
 #### Architecture Diagram
 
-https://i.ibb.co/6rmVcPg/devhacks1.png
+![Image description](https://i.ibb.co/6rmVcPg/devhacks1.png)
 
 #### Technical Description
 
