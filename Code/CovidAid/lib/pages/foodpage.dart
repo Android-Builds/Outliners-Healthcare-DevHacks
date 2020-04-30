@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
-class FoodPage extends StatefulWidget {
+class ReportPage extends StatefulWidget {
   @override
-  _FoodPageState createState() => _FoodPageState();
+  _ReportPageState createState() => _ReportPageState();
 }
 
-class _FoodPageState extends State<FoodPage> {
+class _ReportPageState extends State<ReportPage> {
 
   final snackBar = SnackBar(content: Text('ADDED INFO'));
 
@@ -17,8 +18,15 @@ class _FoodPageState extends State<FoodPage> {
   DocumentReference documentReference;
   bool needfood = false;
   bool needShelter = false;
+  Position position;
 
   static int k=0;
+
+  getCurrentLocation() async {
+    Geolocator geolocator = Geolocator()..forceAndroidLocationManager = true;
+    position = await geolocator.getCurrentPosition();
+    print(position);
+  }
 
   void add() {
     Details details = new Details();
@@ -27,6 +35,8 @@ class _FoodPageState extends State<FoodPage> {
     details.criticality = crit;
     details.needFood = needfood;
     details.needShelter = needShelter;
+    details.latitude = position.latitude.toString();
+    details.longitude = position.longitude.toString();
     k++;
     documentReference = Firestore.instance.document("mydata/"+k.toString());
     documentReference.setData(details.toJson()).whenComplete((){
@@ -35,6 +45,11 @@ class _FoodPageState extends State<FoodPage> {
   }
 
   bool done = false;
+
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {

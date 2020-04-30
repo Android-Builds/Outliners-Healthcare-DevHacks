@@ -36,6 +36,7 @@ dependencies:
   google_sign_in: any
   enum_to_string: ^1.0.9
   shared_preferences:
+  geolocator:
 
 dev_dependencies:
   flutter_test:

@@ -49,7 +49,7 @@ class _HomepageState extends State<Homepage> {
         body: Column(
           children: <Widget>[
             GestureDetector(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodPage())),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>ReportPage())),
               child: Card(
                 margin: EdgeInsets.all(20.0),
                 elevation: 10.0,
