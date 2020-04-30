@@ -1,3 +1,4 @@
+import 'package:CovidAid/pages/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,9 @@ class _SignInScreenState extends State<SignInScreen> {
               right: 50,
               child: InkWell(
                 onTap: (){
-                  _googleSignIn();
+                  signIn().whenComplete(() {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
+                  });
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
@@ -70,9 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
     ): Scaffold(body: Center(child: CircularProgressIndicator(),),) ;
   }
 
-  void _googleSignIn() async{
-
-
+  Future<String> signIn() async{
     try{
       final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
@@ -100,11 +101,11 @@ class _SignInScreenState extends State<SignInScreen> {
         "lastSignedIn" : DateTime.now()
       },merge: true);
 
-
     }catch(e){
       print(e.message);
     }
-
+    
+    return 'signInWithGoogle succeeded';
   }
 
 }
