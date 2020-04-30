@@ -50,11 +50,10 @@ class _AppDrawerState extends State<AppDrawer> {
           // All other Options to go here Debjit Bro
           Divider(),
           _createDrawerItem(icon: Icons.face, text: 'Account'),
-          _createDrawerItem(
-              icon: Icons.track_changes, text: 'Corona Tracker'),
           _createDrawerItem(icon: Icons.favorite_border, text: 'Donate'),
           Divider(),
           _createDrawerItem(icon: Icons.rate_review, text: 'Report'),
+          Divider(),
           Row(
             children: <Widget>[
               SizedBox(width: 20,),

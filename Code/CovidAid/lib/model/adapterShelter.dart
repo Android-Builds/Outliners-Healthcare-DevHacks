@@ -1,5 +1,4 @@
 import 'package:CovidAid/model/shelter_info.dart';
-import 'package:flutter/cupertino.dart';
 
 List<Shelter_Info> getShelter(){
 

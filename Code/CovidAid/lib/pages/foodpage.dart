@@ -11,18 +11,22 @@ class _FoodPageState extends State<FoodPage> {
   final snackBar = SnackBar(content: Text('ADDED INFO'));
 
   final TextEditingController _people = new TextEditingController();
-  final TextEditingController _address = new TextEditingController();
+  final TextEditingController _location = new TextEditingController();
 
   final db = Firestore.instance;
   DocumentReference documentReference;
+  bool needfood = false;
+  bool needShelter = false;
 
   static int k=0;
 
   void add() {
     Details details = new Details();
     details.number = _people.text;
-    details.address = _address.text;
+    details.location = _location.text;
     details.criticality = crit;
+    details.needFood = needfood;
+    details.needShelter = needShelter;
     k++;
     documentReference = Firestore.instance.document("mydata/"+k.toString());
     documentReference.setData(details.toJson()).whenComplete((){
@@ -38,49 +42,81 @@ class _FoodPageState extends State<FoodPage> {
       appBar: AppBar(
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            InputWidget(
-              controller: _people,
-              label: 'Number of People:',
-              hint: 'Enter a number',
-              maxlines: 1,
-              maxlength: 5,
-            ),
-            InputWidget(
-              controller: _address,
-              label: 'Address:',
-              hint: 'Enter address',
-              maxlines: 3,
-              maxlength: 1000,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Row(
-                children: <Widget>[
-                  Text('Criticality: '),
-                  SizedBox(width: 20.0),
-                  Flexible(child: NeedOptions())
-                ],
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              InputWidget(
+                controller: _people,
+                label: 'Number of People: ',
+                hint: 'Enter a number',
+                maxlines: 1,
+                maxlength: 5,
+                keyboardtype: TextInputType.number,
               ),
-            ),
-            MaterialButton(
-              color: Colors.blue,
-              onPressed: () {
-                add();
-                Navigator.pop(context);
-              },
-              child: Text(
-                'Submit',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0
+              InputWidget(
+                controller: _location,
+                label: 'Location: ',
+                hint: 'Enter location',
+                maxlines: 3,
+                maxlength: 1000,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                child: Row(
+                  children: <Widget>[
+                    Text('Criticality: '),
+                    SizedBox(width: 20.0),
+                    Flexible(child: NeedOptions())
+                  ],
                 ),
               ),
-              minWidth: 300.0,
-              height: 60.0,
-            )
-          ],
+              SizedBox(height: 40.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                child: Row(
+                  children: <Widget>[
+                    Checkbox(
+                      value: needfood,
+                      onChanged: (value) {
+                        setState(() {
+                          needfood = !needfood;
+                        });
+                      },
+                    ),
+                    Text('Food'),
+                    Spacer(),
+                    Checkbox(
+                      value: needShelter,
+                      onChanged: (value) {
+                        setState(() {
+                          needShelter = !needShelter;
+                        });
+                      },
+                    ),
+                    Text('Shelter'),                    
+                  ],
+                ),
+              ),
+              SizedBox(height: 40.0),
+              MaterialButton(
+                color: Colors.blue,
+                onPressed: () {
+                  add();
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0
+                  ),
+                ),
+                minWidth: 300.0,
+                height: 60.0,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -120,6 +156,9 @@ class InputWidget extends StatelessWidget {
             child: Container(
               height: maxlines * 60.0,
               child: TextField(
+                onChanged: (value) {
+                  controller.text = value;
+                },
                 keyboardType: keyboardtype,
                 maxLines: maxlines,
                 maxLength: maxlength,
@@ -140,21 +179,25 @@ class InputWidget extends StatelessWidget {
 
 class Details {
   String number;
-  String address;
+  String location;
   String criticality;
   String latitude;
   String longitude;
+  bool needFood;
+  bool needShelter;
 
-  Details({this.number, this.address, 
+  Details({this.number, this.location, 
   this.criticality, this.latitude, this.longitude});
 
   Map<String, dynamic> toJson() =>
   {
     'number': number,
-    'address': address,
+    'location': location,
     'criticality' : criticality,
     'latitude' : latitude,
-    'longitide' : longitude
+    'longitide' : longitude,
+    'food' : needFood,
+    'shelter' : needShelter
   };
 }
 
@@ -165,7 +208,7 @@ class NeedOptions extends StatefulWidget {
 }
 
 enum Criticality { basic, mild, severe }
-String crit;
+String crit  = 'Basic';
 
 class _NeedOptionsState extends State<NeedOptions> {
 
