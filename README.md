@@ -10,7 +10,7 @@ The following section contains the working of the project.
 
 #### Architecture Diagram
 
-Affix an image of the flow diagram/architecture diagram of the solution
+https://i.ibb.co/6rmVcPg/devhacks1.png
 
 #### Technical Description
 
