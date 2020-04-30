@@ -1,4 +1,4 @@
-## Team Name - Domain Name
+## OUTLINERS - HealthCare
 
 The participants are required to use this repository as a template and create a private Github repository under their own username (Single repository per team). The following created sections in this README.md need to be duly filled, highlighting the denoted points for the solution/implementation. Please feel free to create further sub-sections in this markdown, the idea is to understand the gist of the components in a singular document.
 
@@ -22,4 +22,8 @@ An overview of
 ### Team Members
 ----------------------------------
 
-List of team member names and email IDs
+Team Members:
+- Debjit Chakarborty(1806551@kiit.ac.in)
+- Biswarup Mukherjee(1806468@kiit.ac.in)
+- Ganesh Bhandarkar(1806554@kiit.ac.in)
+- Akash Pandey(1706008@kiit.ac.in)
