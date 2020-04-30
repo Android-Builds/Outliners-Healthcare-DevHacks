@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -34,6 +35,16 @@ class _SignInScreenState extends State<SignInScreen> {
         height: height,
         child: Stack(
           children: <Widget>[
+            Center(
+              child: Text(
+                'CovidAid',
+                style: TextStyle(
+                  fontSize: 40.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
             Container(
               decoration: BoxDecoration(
                   image: new DecorationImage(image: AssetImage("assets/mian.jpg"),colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5),
@@ -46,8 +57,10 @@ class _SignInScreenState extends State<SignInScreen> {
               right: 50,
               child: InkWell(
                 onTap: (){
-                  signIn().whenComplete(() {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
+                  signIn().whenComplete(() async {
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('rememberMe', true);
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Homepage()));
                   });
                 },
                 child: ClipRRect(
