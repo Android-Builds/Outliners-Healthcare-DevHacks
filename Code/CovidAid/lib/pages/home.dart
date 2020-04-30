@@ -1,4 +1,6 @@
 import 'package:CovidAid/drawer/drawer.dart';
+import 'package:CovidAid/model/ngo_list.dart';
+import 'package:CovidAid/model/ngo_model.dart';
 import 'package:CovidAid/pages/foodpage.dart';
 import 'package:CovidAid/pages/shelter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +15,15 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  List<NGO> ngo;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ngo = getNGO();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +115,40 @@ class _HomepageState extends State<Homepage> {
                   ),
                 )
               ],
-            )
+            ),
+            SizedBox(height: 30,),
+            Text("NGO CONTACTS",style: TextStyle(fontSize: 20,color: Colors.blue),),
+            SizedBox(height: 10,),
+            Expanded(
+              child: Container(
+                  margin: EdgeInsets.all(10),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.black12,
+                child: ListView.builder(
+                      itemCount: ngo.length,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.all(10),
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(
+                              isThreeLine: true,
+                              title: Text(ngo[index].name),
+                              subtitle: Text("state: ${ngo[index].state} \n contact ${ngo[index].contact}"),
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+            ),
+
+
           ],
         ),
       ),
